@@ -1,0 +1,333 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input Credentials {
+  password: String!
+  username: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+input DateTimeNullableFilter {
+  equals: DateTime
+  gt: DateTime
+  gte: DateTime
+  in: [DateTime!]
+  lt: DateTime
+  lte: DateTime
+  not: DateTime
+  notIn: [DateTime!]
+}
+
+enum EnumTaskStatus {
+  Done
+  New
+  Ongoing
+  Pending
+}
+
+input IntNullableFilter {
+  equals: Int
+  gt: Int
+  gte: Int
+  in: [Int!]
+  lt: Int
+  lte: Int
+  not: Int
+  notIn: [Int!]
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+
+type MetaQueryPayload {
+  count: Float!
+}
+
+type Mutation {
+  createProject(data: ProjectCreateInput!): Project!
+  createTask(data: TaskCreateInput!): Task!
+  createUser(data: UserCreateInput!): User!
+  deleteProject(where: ProjectWhereUniqueInput!): Project!
+  deleteTask(where: TaskWhereUniqueInput!): Task!
+  deleteUser(where: UserWhereUniqueInput!): User!
+  login(credentials: Credentials!): UserInfo!
+  updateProject(data: ProjectUpdateInput!, where: ProjectWhereUniqueInput!): Project!
+  updateTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task!
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User!
+}
+
+type Project {
+  createdAt: DateTime!
+  description: String
+  dueDate: DateTime
+  id: String!
+  name: String
+  owner: User
+  startDate: DateTime
+  tasks(orderBy: [TaskOrderByInput!], skip: Float, take: Float, where: TaskWhereInput): [Task!]!
+  updatedAt: DateTime!
+}
+
+input ProjectCreateInput {
+  description: String
+  dueDate: DateTime
+  name: String
+  owner: UserWhereUniqueInput
+  startDate: DateTime
+  tasks: TaskCreateNestedManyWithoutProjectsInput
+}
+
+input ProjectCreateNestedManyWithoutUsersInput {
+  connect: [ProjectWhereUniqueInput!]
+}
+
+input ProjectListRelationFilter {
+  every: ProjectWhereInput
+  none: ProjectWhereInput
+  some: ProjectWhereInput
+}
+
+input ProjectOrderByInput {
+  createdAt: SortOrder
+  description: SortOrder
+  dueDate: SortOrder
+  id: SortOrder
+  name: SortOrder
+  ownerId: SortOrder
+  startDate: SortOrder
+  updatedAt: SortOrder
+}
+
+input ProjectUpdateInput {
+  description: String
+  dueDate: DateTime
+  name: String
+  owner: UserWhereUniqueInput
+  startDate: DateTime
+  tasks: TaskUpdateManyWithoutProjectsInput
+}
+
+input ProjectUpdateManyWithoutUsersInput {
+  connect: [ProjectWhereUniqueInput!]
+  disconnect: [ProjectWhereUniqueInput!]
+  set: [ProjectWhereUniqueInput!]
+}
+
+input ProjectWhereInput {
+  description: StringNullableFilter
+  dueDate: DateTimeNullableFilter
+  id: StringFilter
+  name: StringNullableFilter
+  owner: UserWhereUniqueInput
+  startDate: DateTimeNullableFilter
+  tasks: TaskListRelationFilter
+}
+
+input ProjectWhereUniqueInput {
+  id: String!
+}
+
+type Query {
+  _projectsMeta(orderBy: [ProjectOrderByInput!], skip: Float, take: Float, where: ProjectWhereInput): MetaQueryPayload!
+  _tasksMeta(orderBy: [TaskOrderByInput!], skip: Float, take: Float, where: TaskWhereInput): MetaQueryPayload!
+  _usersMeta(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): MetaQueryPayload!
+  project(where: ProjectWhereUniqueInput!): Project
+  projects(orderBy: [ProjectOrderByInput!], skip: Float, take: Float, where: ProjectWhereInput): [Project!]!
+  task(where: TaskWhereUniqueInput!): Task
+  tasks(orderBy: [TaskOrderByInput!], skip: Float, take: Float, where: TaskWhereInput): [Task!]!
+  user(where: UserWhereUniqueInput!): User
+  userInfo: UserInfo!
+  users(orderBy: [UserOrderByInput!], skip: Float, take: Float, where: UserWhereInput): [User!]!
+}
+
+enum QueryMode {
+  Default
+  Insensitive
+}
+
+enum SortOrder {
+  Asc
+  Desc
+}
+
+input StringFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+input StringNullableFilter {
+  contains: String
+  endsWith: String
+  equals: String
+  gt: String
+  gte: String
+  in: [String!]
+  lt: String
+  lte: String
+  mode: QueryMode
+  not: String
+  notIn: [String!]
+  startsWith: String
+}
+
+type Task {
+  assignedTo: User
+  createdAt: DateTime!
+  estimationDays: Float
+  id: String!
+  project: Project
+  startDate: DateTime
+  status: EnumTaskStatus
+  title: String!
+  updatedAt: DateTime!
+}
+
+input TaskCreateInput {
+  assignedTo: UserWhereUniqueInput
+  estimationDays: Float
+  project: ProjectWhereUniqueInput
+  startDate: DateTime
+  status: EnumTaskStatus!
+  title: String!
+}
+
+input TaskCreateNestedManyWithoutProjectsInput {
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskCreateNestedManyWithoutUsersInput {
+  connect: [TaskWhereUniqueInput!]
+}
+
+input TaskListRelationFilter {
+  every: TaskWhereInput
+  none: TaskWhereInput
+  some: TaskWhereInput
+}
+
+input TaskOrderByInput {
+  assignedToId: SortOrder
+  createdAt: SortOrder
+  estimationDays: SortOrder
+  id: SortOrder
+  projectId: SortOrder
+  startDate: SortOrder
+  status: SortOrder
+  title: SortOrder
+  updatedAt: SortOrder
+}
+
+input TaskUpdateInput {
+  assignedTo: UserWhereUniqueInput
+  estimationDays: Float
+  project: ProjectWhereUniqueInput
+  startDate: DateTime
+  status: EnumTaskStatus
+  title: String
+}
+
+input TaskUpdateManyWithoutProjectsInput {
+  connect: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+}
+
+input TaskUpdateManyWithoutUsersInput {
+  connect: [TaskWhereUniqueInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+}
+
+input TaskWhereInput {
+  assignedTo: UserWhereUniqueInput
+  estimationDays: IntNullableFilter
+  id: StringFilter
+  project: ProjectWhereUniqueInput
+  startDate: DateTimeNullableFilter
+  status: EnumTaskStatus
+  title: StringFilter
+}
+
+input TaskWhereUniqueInput {
+  id: String!
+}
+
+type User {
+  createdAt: DateTime!
+  firstName: String
+  id: String!
+  lastName: String
+  projects(orderBy: [ProjectOrderByInput!], skip: Float, take: Float, where: ProjectWhereInput): [Project!]!
+  roles: JSON!
+  tasks(orderBy: [TaskOrderByInput!], skip: Float, take: Float, where: TaskWhereInput): [Task!]!
+  updatedAt: DateTime!
+  username: String!
+}
+
+input UserCreateInput {
+  firstName: String
+  lastName: String
+  password: String!
+  projects: ProjectCreateNestedManyWithoutUsersInput
+  roles: JSON!
+  tasks: TaskCreateNestedManyWithoutUsersInput
+  username: String!
+}
+
+type UserInfo {
+  accessToken: String
+  id: String!
+  roles: [String!]!
+  username: String!
+}
+
+input UserOrderByInput {
+  createdAt: SortOrder
+  firstName: SortOrder
+  id: SortOrder
+  lastName: SortOrder
+  password: SortOrder
+  roles: SortOrder
+  updatedAt: SortOrder
+  username: SortOrder
+}
+
+input UserUpdateInput {
+  firstName: String
+  lastName: String
+  password: String
+  projects: ProjectUpdateManyWithoutUsersInput
+  roles: JSON
+  tasks: TaskUpdateManyWithoutUsersInput
+  username: String
+}
+
+input UserWhereInput {
+  firstName: StringNullableFilter
+  id: StringFilter
+  lastName: StringNullableFilter
+  projects: ProjectListRelationFilter
+  tasks: TaskListRelationFilter
+  username: StringFilter
+}
+
+input UserWhereUniqueInput {
+  id: String!
+}
