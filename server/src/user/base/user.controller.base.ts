@@ -30,6 +30,9 @@ import { User } from "./User";
 import { ProjectFindManyArgs } from "../../project/base/ProjectFindManyArgs";
 import { Project } from "../../project/base/Project";
 import { ProjectWhereUniqueInput } from "../../project/base/ProjectWhereUniqueInput";
+import { TaskFindManyArgs } from "../../task/base/TaskFindManyArgs";
+import { Task } from "../../task/base/Task";
+import { TaskWhereUniqueInput } from "../../task/base/TaskWhereUniqueInput";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class UserControllerBase {
@@ -212,6 +215,7 @@ export class UserControllerBase {
       select: {
         createdAt: true,
         description: true,
+        dueDate: true,
         id: true,
         name: true,
 
@@ -289,6 +293,118 @@ export class UserControllerBase {
   ): Promise<void> {
     const data = {
       projects: {
+        disconnect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @nestAccessControl.UseRoles({
+    resource: "Task",
+    action: "read",
+    possession: "any",
+  })
+  @common.Get("/:id/tasks")
+  @ApiNestedQuery(TaskFindManyArgs)
+  async findManyTasks(
+    @common.Req() request: Request,
+    @common.Param() params: UserWhereUniqueInput
+  ): Promise<Task[]> {
+    const query = plainToClass(TaskFindManyArgs, request.query);
+    const results = await this.service.findTasks(params.id, {
+      ...query,
+      select: {
+        assignedTo: {
+          select: {
+            id: true,
+          },
+        },
+
+        createdAt: true,
+        estimationDays: true,
+        id: true,
+
+        project: {
+          select: {
+            id: true,
+          },
+        },
+
+        startDate: true,
+        status: true,
+        title: true,
+        updatedAt: true,
+      },
+    });
+    if (results === null) {
+      throw new errors.NotFoundException(
+        `No resource was found for ${JSON.stringify(params)}`
+      );
+    }
+    return results;
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Post("/:id/tasks")
+  async connectTasks(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: TaskWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      tasks: {
+        connect: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Patch("/:id/tasks")
+  async updateTasks(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: TaskWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      tasks: {
+        set: body,
+      },
+    };
+    await this.service.update({
+      where: params,
+      data,
+      select: { id: true },
+    });
+  }
+
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "update",
+    possession: "any",
+  })
+  @common.Delete("/:id/tasks")
+  async disconnectTasks(
+    @common.Param() params: UserWhereUniqueInput,
+    @common.Body() body: TaskWhereUniqueInput[]
+  ): Promise<void> {
+    const data = {
+      tasks: {
         disconnect: body,
       },
     };
