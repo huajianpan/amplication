@@ -1,5 +1,6 @@
 import { Project } from "../project/Project";
 import { JsonValue } from "type-fest";
+import { Task } from "../task/Task";
 
 export type User = {
   createdAt: Date;
@@ -8,6 +9,7 @@ export type User = {
   lastName: string | null;
   projects?: Array<Project>;
   roles: JsonValue;
+  tasks?: Array<Task>;
   updatedAt: Date;
   username: string;
 };
