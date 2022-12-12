@@ -22,9 +22,10 @@ export const ProjectList = (props: ListProps): React.ReactElement => {
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
         <TextField label="Description" source="description" />
+        <TextField label="Due Date" source="dueDate" />
         <TextField label="ID" source="id" />
         <TextField label="Name" source="name" />
-        <ReferenceField label="Owner" source="user.id" reference="User">
+        <ReferenceField label="Project Owner" source="user.id" reference="User">
           <TextField source={USER_TITLE_FIELD} />
         </ReferenceField>
         <TextField label="Start Date" source="startDate" />

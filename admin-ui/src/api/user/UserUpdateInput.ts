@@ -1,5 +1,6 @@
 import { ProjectUpdateManyWithoutUsersInput } from "./ProjectUpdateManyWithoutUsersInput";
 import { InputJsonValue } from "../../types";
+import { TaskUpdateManyWithoutUsersInput } from "./TaskUpdateManyWithoutUsersInput";
 
 export type UserUpdateInput = {
   firstName?: string | null;
@@ -7,5 +8,6 @@ export type UserUpdateInput = {
   password?: string;
   projects?: ProjectUpdateManyWithoutUsersInput;
   roles?: InputJsonValue;
+  tasks?: TaskUpdateManyWithoutUsersInput;
   username?: string;
 };
