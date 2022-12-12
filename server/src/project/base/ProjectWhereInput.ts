@@ -14,9 +14,10 @@ import { ApiProperty } from "@nestjs/swagger";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { Type } from "class-transformer";
 import { IsOptional, ValidateNested } from "class-validator";
+import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
 import { StringFilter } from "../../util/StringFilter";
 import { UserWhereUniqueInput } from "../../user/base/UserWhereUniqueInput";
-import { DateTimeNullableFilter } from "../../util/DateTimeNullableFilter";
+import { TaskListRelationFilter } from "../../task/base/TaskListRelationFilter";
 @InputType()
 class ProjectWhereInput {
   @ApiProperty({
@@ -29,6 +30,17 @@ class ProjectWhereInput {
     nullable: true,
   })
   description?: StringNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: DateTimeNullableFilter,
+  })
+  @Type(() => DateTimeNullableFilter)
+  @IsOptional()
+  @Field(() => DateTimeNullableFilter, {
+    nullable: true,
+  })
+  dueDate?: DateTimeNullableFilter;
 
   @ApiProperty({
     required: false,
@@ -74,5 +86,17 @@ class ProjectWhereInput {
     nullable: true,
   })
   startDate?: DateTimeNullableFilter;
+
+  @ApiProperty({
+    required: false,
+    type: () => TaskListRelationFilter,
+  })
+  @ValidateNested()
+  @Type(() => TaskListRelationFilter)
+  @IsOptional()
+  @Field(() => TaskListRelationFilter, {
+    nullable: true,
+  })
+  tasks?: TaskListRelationFilter;
 }
 export { ProjectWhereInput };

@@ -22,6 +22,7 @@ import { Type } from "class-transformer";
 import { Project } from "../../project/base/Project";
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { Task } from "../../task/base/Task";
 @ObjectType()
 class User {
   @ApiProperty({
@@ -79,6 +80,15 @@ class User {
   roles!: JsonValue;
 
   @ApiProperty({
+    required: false,
+    type: () => [Task],
+  })
+  @ValidateNested()
+  @Type(() => Task)
+  @IsOptional()
+  tasks?: Array<Task>;
+
+  @ApiProperty({
     required: true,
   })
   @IsDate()
@@ -93,5 +103,16 @@ class User {
   @IsString()
   @Field(() => String)
   username!: string;
+
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  @IsString()
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
+  })
+  xxxx!: string | null;
 }
 export { User };
