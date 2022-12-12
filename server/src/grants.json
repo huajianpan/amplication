@@ -90,16 +90,10 @@
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Project",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
     "role": "manager",
     "resource": "Project",
     "action": "read:own",
-    "attributes": "*"
+    "attributes": "*,!description"
   },
   {
     "role": "admin",
@@ -130,12 +124,6 @@
     "resource": "Project",
     "action": "update:any",
     "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Project",
-    "action": "update:any",
-    "attributes": "*,!id,!startDate"
   },
   {
     "role": "admin",
