@@ -11,6 +11,7 @@ import {
 } from "react-admin";
 
 import { ProjectTitle } from "../project/ProjectTitle";
+import { TaskTitle } from "../task/TaskTitle";
 import { ROLES_OPTIONS } from "../user/RolesOptions";
 
 export const UserCreate = (props: CreateProps): React.ReactElement => {
@@ -34,7 +35,16 @@ export const UserCreate = (props: CreateProps): React.ReactElement => {
           optionText="label"
           optionValue="value"
         />
+        <ReferenceArrayInput
+          source="tasks"
+          reference="Task"
+          parse={(value: any) => value && value.map((v: any) => ({ id: v }))}
+          format={(value: any) => value && value.map((v: any) => v.id)}
+        >
+          <SelectArrayInput optionText={TaskTitle} />
+        </ReferenceArrayInput>
         <TextInput label="Username" source="username" />
+        <TextInput label="xxxx" source="xxxx" />
       </SimpleForm>
     </Create>
   );
