@@ -75,9 +75,9 @@ export class UserServiceBase {
   async findProjects(
     parentId: string,
     args: Prisma.ProjectFindManyArgs
-  ): Promise<Project[] | null> {
-    return this.prisma!.user
-      .findUnique({
+  ): Promise<Project[]> {
+    return this.prisma.user
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .projects(args);
@@ -86,9 +86,9 @@ export class UserServiceBase {
   async findTasks(
     parentId: string,
     args: Prisma.TaskFindManyArgs
-  ): Promise<Task[] | null> {
+  ): Promise<Task[]> {
     return this.prisma.user
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .tasks(args);
