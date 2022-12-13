@@ -50,9 +50,9 @@ export class ProjectServiceBase {
   async findTasks(
     parentId: string,
     args: Prisma.TaskFindManyArgs
-  ): Promise<Task[] | null> {
+  ): Promise<Task[]> {
     return this.prisma.project
-      .findUnique({
+      .findUniqueOrThrow({
         where: { id: parentId },
       })
       .tasks(args);

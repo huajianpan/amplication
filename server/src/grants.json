@@ -1,12 +1,18 @@
 [
   {
-    "role": "user",
+    "role": "manager",
     "resource": "User",
     "action": "read:own",
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "other",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
     "resource": "User",
     "action": "read:own",
     "attributes": "*"
@@ -18,13 +24,19 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "manager",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "other",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
@@ -36,13 +48,19 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "manager",
     "resource": "User",
     "action": "update:any",
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "other",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
     "resource": "User",
     "action": "update:any",
     "attributes": "*"
@@ -51,6 +69,18 @@
     "role": "admin",
     "resource": "User",
     "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "User",
+    "action": "delete:any",
     "attributes": "*"
   },
   {
@@ -60,25 +90,25 @@
     "attributes": "*"
   },
   {
-    "role": "manager",
-    "resource": "User",
-    "action": "delete:any",
-    "attributes": "*"
-  },
-  {
     "role": "admin",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "manager",
     "resource": "User",
     "action": "read:any",
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "other",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
     "resource": "User",
     "action": "read:any",
     "attributes": "*"
@@ -90,16 +120,10 @@
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Project",
-    "action": "read:own",
-    "attributes": "*"
-  },
-  {
     "role": "manager",
     "resource": "Project",
     "action": "read:own",
-    "attributes": "*"
+    "attributes": "*,!description"
   },
   {
     "role": "admin",
@@ -108,13 +132,19 @@
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "manager",
     "resource": "Project",
     "action": "create:any",
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "other",
+    "resource": "Project",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
     "resource": "Project",
     "action": "create:any",
     "attributes": "*"
@@ -132,21 +162,9 @@
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Project",
-    "action": "update:any",
-    "attributes": "*,!id,!startDate"
-  },
-  {
     "role": "admin",
     "resource": "Project",
     "action": "delete:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Project",
-    "action": "read:any",
     "attributes": "*"
   },
   {
@@ -156,15 +174,21 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "other",
     "resource": "Project",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Task",
-    "action": "read:own",
+    "resource": "Project",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Project",
+    "action": "read:any",
     "attributes": "*"
   },
   {
@@ -174,7 +198,7 @@
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "other",
     "resource": "Task",
     "action": "read:own",
     "attributes": "*"
@@ -182,7 +206,13 @@
   {
     "role": "user",
     "resource": "Task",
-    "action": "create:any",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Task",
+    "action": "read:own",
     "attributes": "*"
   },
   {
@@ -192,9 +222,33 @@
     "attributes": "*"
   },
   {
+    "role": "other",
+    "resource": "Task",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Task",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
     "role": "admin",
     "resource": "Task",
     "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Task",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Task",
+    "action": "update:any",
     "attributes": "*"
   },
   {
@@ -204,15 +258,21 @@
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "admin",
     "resource": "Task",
     "action": "update:any",
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "manager",
     "resource": "Task",
-    "action": "update:any",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Task",
+    "action": "delete:any",
     "attributes": "*"
   },
   {
@@ -222,15 +282,21 @@
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "admin",
     "resource": "Task",
     "action": "delete:any",
     "attributes": "*"
   },
   {
-    "role": "admin",
+    "role": "manager",
     "resource": "Task",
-    "action": "delete:any",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Task",
+    "action": "read:any",
     "attributes": "*"
   },
   {
@@ -240,14 +306,128 @@
     "attributes": "*"
   },
   {
-    "role": "manager",
+    "role": "admin",
     "resource": "Task",
     "action": "read:any",
     "attributes": "*"
   },
   {
+    "role": "manager",
+    "resource": "Role",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Role",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Role",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
     "role": "admin",
-    "resource": "Task",
+    "resource": "Role",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Role",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Role",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Role",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Role",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Role",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Role",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Role",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Role",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Role",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Role",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Role",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Role",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "manager",
+    "resource": "Role",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "other",
+    "resource": "Role",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Role",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Role",
     "action": "read:any",
     "attributes": "*"
   }
